@@ -1,24 +1,4 @@
+<h1>Schedule 3AMWorks</h1>
+<p>This is a simple project to manage scheduling for multimedia division in church. Simply login by facebook to use.</p>
 
-<h2>Login Page</h2>
-
-<form>
-    <label>
-        <span>email</span>
-        <input type="text" ng-model="email" />
-    </label>
-    <label>
-        <span>password</span>
-        <input type="password" ng-model="pass" />
-    </label>
-    <label ng-cloak ng-show="createMode">
-        <span>confirm pass</span>
-        <input type="password" ng-model="confirm" />
-    </label>
-    <button ng-click="login()" ng-hide="createMode">Log In</button>
-    <button ng-click="createMode = true" ng-hide="createMode">Register</button>
-    <button ng-cloak ng-show="createMode" ng-click="createAccount()">Create Account</button>
-    <button ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>
-
-    <p ng-show="err" class="error">{{err}}</p>
-</form>
-
+<a ng-click="login()" href class="btn btn-lg btn-primary">Login Facebook</a>
