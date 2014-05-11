@@ -8,7 +8,14 @@ angular.module('myApp.filters', [])
          return String(text).replace(/\%VERSION\%/mg, version);
       }
    }])
-
+   .filter('range', function() {
+     return function(input, total) {
+       total = parseInt(total);
+       for (var i=0; i<total; i++)
+         input.push(i);
+       return input;
+     };
+   })
    .filter('reverse', function() {
       function toArray(list) {
          var k, out = [];

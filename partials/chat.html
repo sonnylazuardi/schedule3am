@@ -8,8 +8,3 @@
 <ul id="messages" ng-show="messages">
     <li ng-repeat="message in messages | orderByPriority | reverse">{{message.text}}</li>
 </ul>
-
-<p>
-  Running the 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>

@@ -1,3 +1,37 @@
 <h2>Schedule</h2>
 
+<div class="row">
+    <div class="col-md-2" ng-repeat="user in users" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}" data-name="{{user.name}}" data-fbid="{{user.fbid}}">
+        <img ng-src="http://graph.facebook.com/{{user.fbid}}/picture" alt="" >
+        {{user.name.split(" ")[0]}}
+    </div>
+</div>
+
+<div>
+    <h3>{{bulan[month-1]}} {{year}}</h3>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Worker</th>
+        </tr>
+        <tbody ng-repeat="(tglId, tgl) in getTanggalMinggu(month, year)">
+            <tr ng-repeat="(ibdhId, n) in [] | range:3">
+                <td rowspan="3" ng-show="ibdhId == 0">{{tgl}}</td>
+                <td>{{ibdhId+1}}</td>
+                <td>
+                    <div data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'dropCallback()'}" data-jqyoui-options="" data-tanggal="{{tgl}}" data-ibdh="{{ibdhId+1}}" class="dropper">
+                       <p ng-repeat="item in data[tglId*3+ibdhId] | orderByPriority">
+                            <img ng-src="http://graph.facebook.com/{{item.fbid}}/picture" alt="">
+                            {{item.name}}
+
+                            <a href class="btn btn-danger" ng-click="delete(tglId*3+ibdhId, data[tglId*3+ibdhId].$getIndex()[$index])">X</a>
+                       </p> 
+                   </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 <a href ng-click="logout()" class="btn btn-danger">Log Out</a>
