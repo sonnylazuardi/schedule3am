@@ -66,6 +66,7 @@ angular.module('myApp.controllers', [])
    });
 }])
 .controller('ScheduleCtrl', ['$scope', 'syncData', 'loginService', 'firebaseRef', function($scope, syncData, loginService, firebaseRef) {
+   syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
    $scope.getTanggalMinggu = function(month, year) {
       var date;
       var result = [];
@@ -82,6 +83,28 @@ angular.module('myApp.controllers', [])
    //       console.log(event);
    //    }
    // };
+   function touchHandler(event) {
+      var touch = event.changedTouches[0];
+
+      var simulatedEvent = document.createEvent("MouseEvent");
+      simulatedEvent.initMouseEvent({
+         touchstart: "mousedown",
+         touchmove: "mousemove",
+         touchend: "mouseup"
+      }[event.type], true, true, window, 1,
+      touch.screenX, touch.screenY,
+      touch.clientX, touch.clientY, false,
+      false, false, false, 0, null);
+
+      touch.target.dispatchEvent(simulatedEvent);
+      event.preventDefault();
+   }
+   
+   document.addEventListener("touchstart", touchHandler, true);
+   document.addEventListener("touchmove", touchHandler, true);
+   document.addEventListener("touchend", touchHandler, true);
+   document.addEventListener("touchcancel", touchHandler, true);
+
    $scope.delete = function(tglId, id) {
       $scope.data[tglId].$remove(id);
    }
@@ -108,6 +131,14 @@ angular.module('myApp.controllers', [])
    $scope.logout = function() {
       loginService.logout();
    }
+   $scope.newMessage = null;
+   $scope.messages = syncData('messages', 10);
+   $scope.addMessage = function() {
+      if( $scope.newMessage ) {
+         $scope.messages.$add({text: $scope.newMessage, fbid: $scope.user.fbid});
+         $scope.newMessage = null;
+      }
+   };
    $scope.bulan = [
       'Januari',
       'Februari',

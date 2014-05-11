@@ -5,6 +5,6 @@
   <button type="submit" ng-click="addMessage()">send</button>
 </form>
 
-<ul id="messages" ng-show="messages">
-    <li ng-repeat="message in messages | orderByPriority | reverse">{{message.text}}</li>
-</ul>
+<div id="messages" ng-show="messages">
+    <div ng-repeat="message in messages | orderByPriority | reverse">{{message.text}}</div>
+</div>

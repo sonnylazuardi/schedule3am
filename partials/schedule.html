@@ -34,4 +34,19 @@
     </table>
 </div>
 
+<h2>Chat</h2>
+
+<form>
+  <input placeholder="Message..." ng-model="newMessage" class="form-control">
+  <button type="submit" ng-click="addMessage()" class="btn btn-success">Send</button>
+</form>
+<br>
+<div id="messages" ng-show="messages" class="well">
+    <div ng-repeat="message in messages | orderByPriority | reverse">
+        <img src="http://graph.facebook.com/{{message.fbid}}/picture" alt=""> 
+        {{message.text}}
+    </div>
+</div>
+<br>
+
 <a href ng-click="logout()" class="btn btn-danger">Log Out</a>
