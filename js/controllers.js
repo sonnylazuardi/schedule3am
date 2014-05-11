@@ -4,6 +4,7 @@
 
 angular.module('myApp.controllers', [])
 .controller('LoginCtrl', ['$scope', 'syncData', 'loginService', '$location', function($scope, syncData, loginService, $location) {
+   $scope.messages = syncData('messages', 10);
    $scope.login = function(cb) {
       loginService.login(null, null, function(err, user) {
          $scope.err = err? err + '' : null;

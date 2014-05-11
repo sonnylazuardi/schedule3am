@@ -30,3 +30,12 @@
         </tbody>
     </table>
 </div>
+
+<h2>Chat</h2>
+
+<div id="messages" ng-show="messages" class="well">
+    <div ng-repeat="message in messages | orderByPriority | reverse">
+        <img src="http://graph.facebook.com/{{message.fbid}}/picture" alt=""> 
+        {{message.text}}
+    </div>
+</div>
